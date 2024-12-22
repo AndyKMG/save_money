@@ -34,9 +34,9 @@ class _ConnexionState extends State<Connexion> {
       TextEditingController(); // Contrôleur pour le champ de saisie
 
   // Fonction pour vérifier si le numéro existe dans la base de données
-  void checkUser(numero) async {
-    // final numero =
-    //     numeroController.text.trim(); // Récupère le numéro sans espace
+  void checkUser() async {
+    final numero =
+        numeroController.text.trim(); // Récupère le numéro sans espace
 
     if (numero.isEmpty || numero.length == 0) {
       // Afficher un message de succès ou de redirection
@@ -125,6 +125,7 @@ class _ConnexionState extends State<Connexion> {
                 Form(
                   key: _formKey,
                   child: TextFormField(
+                    controller: numeroController,
                     decoration: InputDecoration(
                       hintText: 'Numéro de téléphone',
                       hintStyle: TextStyle(color: Colors.black),
@@ -138,7 +139,7 @@ class _ConnexionState extends State<Connexion> {
                     keyboardType: TextInputType.phone,
                     onChanged: (value) {
                       setState(() {
-                       // print(numero);
+                       print(numeroController.text);
                         numero = value;
                       });
                     },
@@ -160,7 +161,7 @@ class _ConnexionState extends State<Connexion> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed: () => {print(numero), checkUser(numero)},
+                  onPressed: checkUser,
                   child: Text(
                     'Envoi',
                     style: TextStyle(
